@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 0px 27px 0px rgba(0, 0, 0, .5);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>CGPA Calculator</h2>
+        <div class="form-group">
+            <label for="numSubjects">Number of Subjects:</label>
+            <input type="number" id="numSubjects" min="1">
+        </div>
+        <div class="form-group">
+            <label for="subjectGrades">Grades of Subjects (comma-separated, uppercase):</label>
+            <input type="text" id="subjectGrades">
+        </div>
+        <div class="form-group">
+            <label for="numLabs">Number of Labs:</label>
+            <input type="number" id="numLabs" min="0">
+        </div>
+        <div class="form-group">
+            <label for="labGrades">Grades of Labs (comma-separated, uppercase):</label>
+            <input type="text" id="labGrades">
+        </div>
+        <button onclick="calculateCGPA()">Calculate CGPA</button>
+        <div id="result"></div>
+    </div>
+    <script src="script.js"></script>
+<script>
+
+function calculateCGPA() {
+    var numSubjects = parseInt(document.getElementById('numSubjects').value);
+    var subjectGrades = document.getElementById('subjectGrades').value.toUpperCase().split(',');
+    var numLabs = parseInt(document.getElementById('numLabs').value);
+    var labGrades = document.getElementById('labGrades').value.toUpperCase().split(',');
+
+    var result_of_subjects = printCombinedMarks(subjectGrades, true);
+    var result_of_labs = printCombinedMarks(labGrades, false);
+
+    var final_sum = (result_of_subjects + result_of_labs) / (numSubjects * 4 + numLabs * 2);
+
+    document.getElementById('result').innerHTML = `
+                <p>Total Subject Sum: ${result_of_subjects}</p>
+                <p>Total Lab Sum: ${result_of_labs}</p>
+                <p>Your CGPA is: ${final_sum.toFixed(2)}</p>
+            `;
+}
+
+function printCombinedMarks(marks, isSubjectArray) {
+    var total = 0;
+
+    for (var i = 0; i < marks.length; i++) {
+        switch (marks[i]) {
+            case 'S':
+                total += isSubjectArray ? 40 : 20;
+                break;
+            case 'A':
+                total += isSubjectArray ? 36 : 18;
+                break;
+            case 'B':
+                total += isSubjectArray ? 32 : 16;
+                break;
+            case 'C':
+                total += isSubjectArray ? 28 : 14;
+                break;
+            case 'D':
+                total += isSubjectArray ? 24 : 12;
+                break;
+            default:
+                console.log("Invalid grade encountered for element " + i + ": " + marks[i]);
+                break;
+        }
+    }
+
+    return total;
+}
+
+</script>
+</body>
+
+</html>

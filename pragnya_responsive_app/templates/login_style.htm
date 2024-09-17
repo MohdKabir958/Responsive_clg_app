@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login for pdc app</title>
+
+    <link rel="stylesheet" href="/pragnya_responsive_app/static/login_style.css">
+</head>
+
+<body>
+    <div class="super_main">
+        <!-- header start  -->
+        <header>
+            <nav>
+                <div class="navbar">
+                    <div class="left">
+                        <span id="element"></span>
+                    </div>
+                    <div class="right nav-links ">
+
+                        <button class="cssbuttons-io">
+                            <!-- <span>
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path
+                                    d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
+                                    fill="currentColor"></path>
+                                </svg>
+                                <a href="#" class="links">PROFILE</a>
+                            </span>
+                        </button> -->
+
+
+                            <button class="cssbuttons-io" onclick="openSignUpPage()">
+                                <span>
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                    <path
+                                        d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
+                                        fill="currentColor"></path>
+                                    </svg>
+                                    <a href="/pragnya_responsive_app/templates/signUp.htm" class="links">SIGN UP</a>
+                                </span>
+                            </button>
+
+                            <!-- <button class="cssbuttons-io">
+                            <span>
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path
+                                    d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
+                                    fill="currentColor"></path>
+                                </svg>
+                                <a href="login2.html" class="links">LOGIN</a>
+                            </span>
+                        </button> -->
+
+                            <button class="cssbuttons-io" onclick="openindexPage()">
+                                <span>
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                    <path
+                                        d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
+                                        fill="currentColor"></path>
+                                    </svg>
+                                    <a href="/pragnya_responsive_app/templates/index.html" class="links">LOGOUT</a>
+                                </span>
+                            </button>
+
+
+                    </div>
+                    <div class="burger" id="burger">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- header stop -->
+
+
+        <div class="main_sec">
+
+            <div class="rhombus_parent">
+                <div class="rhombus"></div>
+            </div>
+
+            <div class="logo_form">
+                <div class="logo">
+                    <img src="/pragnya_responsive_app/static/images_folder/pragnya.jpg" alt="image of logo">
+                </div>
+
+                <div class="login_form">
+                    <p id="flash"></p>
+                    <form action="" class="form_main" id="login_form" onsubmit="return validateLoginForm()">
+                        <p class="heading">Login</p>
+                        <div class="inputContainer">
+                            <svg class="inputIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="#2e2e2e" viewBox="0 0 16 16">
+                                <path
+                                    d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z">
+                                </path>
+                            </svg>
+                            <input type="email" required name="email" class="inputField" id="email_login"
+                                placeholder="Enter your E-Mail">
+                        </div>
+
+                        <div class="inputContainer">
+                            <svg class="inputIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="#2e2e2e" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z">
+                                </path>
+                            </svg>
+                            <input type="password" required class="inputField" id="password_login" name="password"
+                                placeholder="Password">
+                        </div>
+
+
+                        <button id="button" type="submit" onsubmit="return loginFormValidator()">Submit</button>
+                        <a class="forgotLink" href="#">Forgot your password?</a>
+                        <p class="lastline">Dont have an account ? <a href="/pragnya_responsive_app/templates/signUp.htm">Sign up </a></p>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="/pragnya_responsive_app/scripts/loginScript.js"></script>
+</body>
+
+
+
+
+<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+<script>
+    var typed = new
+        Typed('#element', {
+            strings: ['BCA STUDENT PORTAL'],
+            typeSpeed: 50, Loop: 50,
+        });
+</script>
+
+<script>
+    const burger = document.getElementById('burger');
+    const navLinks = document.querySelector('.nav-links');
+
+    burger.addEventListener('click', () => {
+        // Toggle the visibility of navigation buttons
+        navLinks.classList.toggle('nav-active');
+        console.log("Button Clicked !!!")
+        console.log(navLinks);
+    });
+
+    function openindexPage() {
+        window.location.href = 'index.html'
+    }
+    function openSignUpPage() {
+        window.location.href = 'signUp.htm'
+    }
+
+</script>
+
+</html>
