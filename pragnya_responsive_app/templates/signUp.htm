@@ -1,79 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignUp for APP</title>
-    <link rel="stylesheet" href="/pragnya_responsive_app/static/signup_style.css">
-</head>
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='signup_style.css') }}">
 <body>
     <div class="supermain">
         <!-- header start  -->
-        <header>
-            <nav>
-                <div class="navbar">
-                    <div class="left">
-                        <span id="element"></span>
-                    </div>
-                    <div class="right">
-
-                        <button class="cssbuttons-io">
-                            <!-- <span>
-                                <path d="M0 0h24v24H0z" fill="none"></path>
-                                <path
-                                    d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
-                                    fill="currentColor"></path>
-                                </svg>
-                                <a href="#" class="links">PROFILE</a>
-                            </span>
-                        </button> -->
-
-
-                            <button class="cssbuttons-io">
-                                <span>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                    <path
-                                        d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
-                                        fill="currentColor"></path>
-                                    </svg>
-                                    <a href="/pragnya_responsive_app/templates/login_style.htm" class="links">LOGIN</a>
-                                </span>
-                            </button>
-
-                            <!-- <button class="cssbuttons-io">
-                            <span>
-                                <path d="M0 0h24v24H0z" fill="none"></path>
-                                <path
-                                    d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
-                                    fill="currentColor"></path>
-                                </svg>
-                                <a href="login2.html" class="links">LOGIN</a>
-                            </span>
-                        </button> -->
-
-                            <button class="cssbuttons-io">
-                                <span>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                    <path
-                                        d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
-                                        fill="currentColor"></path>
-                                    </svg>
-                                    <a href="/pragnya_responsive_app/templates/index.html" class="links">LOGOUT</a>
-                                </span>
-                            </button>
-
-
-                    </div>
-                    <div class="burger">
-                        <div class="line"></div>
-                        <div class="line"></div>
-                        <div class="line"></div>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        
-        <!-- header stop -->
         
         <div class="main_sec">
             <div class="rhombus_parent">
@@ -81,40 +15,52 @@
             </div>
             <div class="logo_form">
                 <div class="logo">
-                    <img src="/pragnya_responsive_app/static/images_folder/pragnya.jpg" alt="image of logo">
+                    <img src="{{ url_for('static' ,filename='images_folder/pragnya.jpg') }}" alt="image of logo">
                 </div>
                 
-                <form class="form form_main" onsubmit="return validateForm()" >
+                <form action="{{ url_for('auth.signup_post') }}" method="POST" class="form form_main" onsubmit="return validateForm()"  >
                     <p class="title">Signup</p>
+                    <div class="flashes">
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                            <h3 style="color: red;">{{ message }}</h3>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+            
                     <p id="flash"> </p>
                     <!-- <p class="message">Signup now and get full access to our PORTAL </p> -->
                     <div class="flex">
                         <label>
-                            <input required="" placeholder="" type="text" class="input" id="firstName">
+                            <input required="" placeholder="" type="text" class="input" name="firstName" id="firstName">
                             <span>Firstname</span>
                         </label>
     
                         <label>
-                            <input required="" placeholder="" type="text" class="input" id="lastName">
+                            <input required="" placeholder="" type="text" class="input" name="lastName" id="lastName">
                             <span>Lastname</span>
                         </label>
                     </div>
     
                     <label>
-                        <input required="" placeholder="" type="email" class="input" id="email">
+                        <input required="" placeholder="" type="email" class="input" name="email" id="email">
                         <span>Email</span>
                     </label>
     
                     <label>
-                        <input required="" placeholder="" type="password" class="input" id="password">
+                        <input required="" placeholder="" type="password" class="input" name="password" id="password">
                         <span>Password</span>
                     </label>
                     <label>
-                        <input required="" placeholder="" type="password" class="input" id="confirmPassword">
+                        <input required="" placeholder="" type="password" class="input" name="confirmPassword" id="confirmPassword">
                         <span>Confirm password</span>
                     </label>
                     <button class="submit"  type="submit"  onsubmit="return validateForm()">Submit</button>
-                    <p class="signin">Already have an acount ? <a href="login2.html">Login</a> </p>
+                    <p class="signin">Already have an acount ? <a href="{{ url_for( 'auth.login' ) }}">Login</a> </p>
                 </form>
 
             </div>
@@ -133,3 +79,5 @@
 </script>
 
 </html>
+
+{% endblock %}

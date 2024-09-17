@@ -1,54 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/pragnya_responsive_app/static/index_style.css">
-</head>
-
+{% block content %}
 <body>
-    <header>
-        <nav>
-            <div class="navbar ">
-                <div class="left">
-                    <span id="element"></span>
-                </div>
-                <div class="right nav-links">
-                    <button class="cssbuttons-io" onclick="openSignUpPage()">
-                        <span>
-                            <path d="M0 0h24v24H0z" fill="none"></path>
-                            <path
-                                d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
-                                fill="currentColor"></path>
-                            </svg>
-                            <a href="/pragnya_responsive_app/templates/signUp.htm" class="links">SIGN UP</a>
-                        </span>
-                    </button>
-
-                    <button class="cssbuttons-io" onclick="openLoginPage()">
-                        <span>
-                            <path d="M0 0h24v24H0z" fill="none"></path>
-                            <path
-                                d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
-                                fill="currentColor"></path>
-                            </svg>
-                            <a href="/pragnya_responsive_app/templates/login_style.htm" class="links">LOGIN</a>
-                        </span>
-                    </button>
-                </div>
-                <div id="burger" class="burger">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-
-    <section class="1">
+<section class="1">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style_index.css') }}">
         <div class="main">
 
             <div class="main_left">
@@ -63,44 +21,18 @@
                 </p>
             </div>
             <div class="main_right">
-                <img src="/pragnya_responsive_app/static/images_folder/chairman.webp" alt="chairman" id="chairman">
+                <img src=" {{ url_for('static',filename='images_folder/chairman.webp') }}" alt="chairman" id="chairman">
                 <h3>S. SREENIVASA REDDY</h3>
                 <p> M.Com, LLB <br>
                     CHAIRMAN </p>
             </div>
         </div>
     </section>
-
-
-    <script>
-        const burger = document.getElementById('burger');
-        const navLinks = document.querySelector('.nav-links');
-
-        burger.addEventListener('click', () => {
-            // Toggle the visibility of navigation buttons
-            navLinks.classList.toggle('nav-active');
-            console.log("Button Clicked !!!")
-            console.log(navLinks);
-        });
-
-        function openLoginPage() {
-            window.location.href = 'login_style.htm'
-        }
-        function openSignUpPage() {
-            window.location.href = 'signUp.htm'
-        }
     
-    </script>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-    <script>
-        var typed = new
-            Typed('#element', {
-                strings: ['BCA STUDENT PORTAL'],
-                typeSpeed: 50, Loop: 50,
-            });
 
 
-    </script>
+
 </body>
 
-</html>
+
+{% endblock %}

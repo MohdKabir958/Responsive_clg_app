@@ -1,113 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .cookieCard {
-            width: 100%;
-            max-width: 300px;
-            height: 300px;
-            background: linear-gradient(to right, rgb(137, 104, 255), rgb(175, 152, 255));
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-            /* border: 2px solid black; */
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cookieCard::before {
-            width: 150px;
-            height: 150px;
-            content: "";
-            background: linear-gradient(to right, rgb(142, 110, 255), rgb(208, 195, 255));
-            position: absolute;
-            z-index: 1;
-            border-radius: 50%;
-            right: -25%;
-            top: -25%;
-        }
-
-        .cookieHeading {
-            font-size: 1.5em;
-            font-weight: 600;
-            color: rgb(241, 241, 241);
-            z-index: 2;
-        }
-
-        .cookieDescription {
-            font-size: 0.9em;
-            color: rgb(241, 241, 241);
-            z-index: 2;
-        }
-
-        .cookieDescription a {
-            color: rgb(241, 241, 241);
-        }
-
-        .acceptButton {
-            padding: 11px 20px;
-            background-color: #7b57ff;
-            transition-duration: .2s;
-            border: none;
-            color: rgb(241, 241, 241);
-            cursor: pointer;
-            font-weight: 600;
-            z-index: 2;
-        }
-
-        .acceptButton:hover {
-            /* background-color: #714aff; */
-            background-color: #fff;
-            color: black;
-            transition-duration: .2s;
-        }
-
-
-        .main {
-            height: 100vh;
-            width: 100vw;
-            /* border: 2px solid red; */
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-
-        @media (max-width: 768px) {
-            .cookieCard {
-                width: 100%;
-                max-width: 100%;
-                border: 2px solid black;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .cookieHeading {
-                font-size: 1.2em;
-            }
-
-            .cookieDescription {
-                font-size: 0.8em;
-            }
-
-            .acceptButton {
-                padding: 15px 15px;
-                font-size: 0.9em;
-            }
-        }
-    </style>
-</head>
+{% block content %}
 
 <body>
+    <link rel="stylesheet" href="{{ url_for('static',filename='cards.css') }}">
+<div>
+    {% if username %}
+    <h1 style="color: lightgreen; padding-top;:5px">Welcome, {{ username }}!</h1>
+{% endif %}
+</div>
     <div class="main">
-
         <div class="cookieCard">
             <p class="cookieHeading">CGPA CALCULATOR</p>
             <p class="cookieDescription">Calculate your GPA by entering your Grades .
@@ -115,7 +20,7 @@
                 <br>
                 Note :- This CGPA calculator is for BCA course only and U cannot Calculate other courses GPA
             </p>
-            <button class="acceptButton" onclick="openCalciPage()">Go To Calculator</button>
+            <button class="acceptButton" >Go To Calculator</button>
         </div>
 
 
@@ -126,7 +31,7 @@
                 <br>
                 Note :- If your attendence is less than 50% then u have to pay attendence fees to the university
             </p>
-            <button class="acceptButton" onclick="openAttendencePage()">Check Your Attendence</button>
+            <button class="acceptButton" >Check Your Attendence</button>
         </div>
 
 
@@ -137,22 +42,13 @@
                 <br>
                 Note :- The model papers are just for refrence and the questions in previous have chance to repeat
             </p>
-            <button class="acceptButton" onclick="openModelPage()">Explore Papers</button>
+            <button class="acceptButton">Explore Papers</button>
         </div>
 
     </div>
-    <script>
-        function openCalciPage() {
-            window.location.href = 'calci_frontend.html'
-        }
-        function openModelPage() {
-            window.location.href = 'model_paper.html'
-        }
-        function openAttendencePage() {
-            window.location.href = ''
-        }
-
-    </script>
+    
 </body>
 
 </html>
+
+{% endblock %}

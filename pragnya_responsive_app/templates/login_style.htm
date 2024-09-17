@@ -1,83 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login for pdc app</title>
-
-    <link rel="stylesheet" href="/pragnya_responsive_app/static/login_style.css">
-</head>
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static',filename='login_style.css')  }}">
 
 <body>
     <div class="super_main">
         <!-- header start  -->
-        <header>
-            <nav>
-                <div class="navbar">
-                    <div class="left">
-                        <span id="element"></span>
-                    </div>
-                    <div class="right nav-links ">
-
-                        <button class="cssbuttons-io">
-                            <!-- <span>
-                                <path d="M0 0h24v24H0z" fill="none"></path>
-                                <path
-                                    d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
-                                    fill="currentColor"></path>
-                                </svg>
-                                <a href="#" class="links">PROFILE</a>
-                            </span>
-                        </button> -->
-
-
-                            <button class="cssbuttons-io" onclick="openSignUpPage()">
-                                <span>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                    <path
-                                        d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
-                                        fill="currentColor"></path>
-                                    </svg>
-                                    <a href="/pragnya_responsive_app/templates/signUp.htm" class="links">SIGN UP</a>
-                                </span>
-                            </button>
-
-                            <!-- <button class="cssbuttons-io">
-                            <span>
-                                <path d="M0 0h24v24H0z" fill="none"></path>
-                                <path
-                                    d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
-                                    fill="currentColor"></path>
-                                </svg>
-                                <a href="login2.html" class="links">LOGIN</a>
-                            </span>
-                        </button> -->
-
-                            <button class="cssbuttons-io" onclick="openindexPage()">
-                                <span>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                    <path
-                                        d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
-                                        fill="currentColor"></path>
-                                    </svg>
-                                    <a href="/pragnya_responsive_app/templates/index.html" class="links">LOGOUT</a>
-                                </span>
-                            </button>
-
-
-                    </div>
-                    <div class="burger" id="burger">
-                        <div class="line"></div>
-                        <div class="line"></div>
-                        <div class="line"></div>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-        <!-- header stop -->
-
+       
 
         <div class="main_sec">
 
@@ -87,12 +19,23 @@
 
             <div class="logo_form">
                 <div class="logo">
-                    <img src="/pragnya_responsive_app/static/images_folder/pragnya.jpg" alt="image of logo">
+                    <img src="{{  url_for('static', filename='images_folder/pragnya.jpg')  }}" alt="image of logo">
                 </div>
 
                 <div class="login_form">
                     <p id="flash"></p>
-                    <form action="" class="form_main" id="login_form" onsubmit="return validateLoginForm()">
+                    <div class="container mt-5">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" style="color: red;">
+                    <h3>{{ message }}</h3>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                
+                    <form  method="POST" action="{{ url_for('auth.login_post') }}"  class="form_main" id="login_form" onsubmit="return validateLoginForm()">
                         <p class="heading">Login</p>
                         <div class="inputContainer">
                             <svg class="inputIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -115,11 +58,15 @@
                             <input type="password" required class="inputField" id="password_login" name="password"
                                 placeholder="Password">
                         </div>
+                        <div>
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Remember Me</label>
+                        </div>
 
 
                         <button id="button" type="submit" onsubmit="return loginFormValidator()">Submit</button>
                         <a class="forgotLink" href="#">Forgot your password?</a>
-                        <p class="lastline">Dont have an account ? <a href="/pragnya_responsive_app/templates/signUp.htm">Sign up </a></p>
+                        <p class="lastline">Dont have an account ? <a href="{{ url_for('auth.signup') }}">Sign up </a></p>
                     </form>
                 </div>
 
@@ -133,33 +80,6 @@
 
 
 
-<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-<script>
-    var typed = new
-        Typed('#element', {
-            strings: ['BCA STUDENT PORTAL'],
-            typeSpeed: 50, Loop: 50,
-        });
-</script>
-
-<script>
-    const burger = document.getElementById('burger');
-    const navLinks = document.querySelector('.nav-links');
-
-    burger.addEventListener('click', () => {
-        // Toggle the visibility of navigation buttons
-        navLinks.classList.toggle('nav-active');
-        console.log("Button Clicked !!!")
-        console.log(navLinks);
-    });
-
-    function openindexPage() {
-        window.location.href = 'index.html'
-    }
-    function openSignUpPage() {
-        window.location.href = 'signUp.htm'
-    }
-
-</script>
 
 </html>
+{% endblock %}
