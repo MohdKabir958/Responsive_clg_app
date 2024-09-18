@@ -15,3 +15,11 @@ def home():
 @main.route('/mainpage/<username>')
 def mainpage(username):
     return render_template('cards.html',show_auth_buttons=False,username=username)
+
+@main.route('/calculator')
+def calculator():
+    return render_template('calculator.html')
+
+@main.route('/modelpaper')
+def modelpaper():
+    return render_template('model_paper.html')

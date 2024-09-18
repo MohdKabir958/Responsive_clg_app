@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='cards.css') }}">
 <div>
     {% if username %}
-    <h1 style="color: lightgreen; padding-top;:5px">Welcome, {{ username }}!</h1>
+    <h1 style="color: lightgreen; padding-top:5px">Welcome, {{ username }}!</h1>
 {% endif %}
 </div>
     <div class="main">
@@ -20,7 +20,9 @@
                 <br>
                 Note :- This CGPA calculator is for BCA course only and U cannot Calculate other courses GPA
             </p>
+            <a href="{{ url_for('main.calculator') }}">
             <button class="acceptButton" >Go To Calculator</button>
+            </a>
         </div>
 
 
@@ -31,7 +33,7 @@
                 <br>
                 Note :- If your attendence is less than 50% then u have to pay attendence fees to the university
             </p>
-            <button class="acceptButton" >Check Your Attendence</button>
+                <button class="acceptButton">Check Your Attendance</button>
         </div>
 
 
@@ -42,7 +44,9 @@
                 <br>
                 Note :- The model papers are just for refrence and the questions in previous have chance to repeat
             </p>
+            <a href="{{ url_for('main.modelpaper') }}">
             <button class="acceptButton">Explore Papers</button>
+            </a>
         </div>
 
     </div>
