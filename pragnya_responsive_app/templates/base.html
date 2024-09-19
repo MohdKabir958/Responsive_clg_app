@@ -16,7 +16,7 @@
                     <span id="element"></span>
                 </div>
                 <div class="right nav-links">
-                    <button class="cssbuttons-io" onclick="openLoginPage()">
+                    <button class="cssbuttons-io">
                         <span>
                             <path d="M0 0h24v24H0z" fill="none"></path>
                             <path
@@ -28,7 +28,7 @@
                     </button>
                     
                     {% if show_auth_buttons %}
-                    <button class="cssbuttons-io" onclick="openSignUpPage()">
+                    <button class="cssbuttons-io">
                         <span>
                             <path d="M0 0h24v24H0z" fill="none"></path>
                             <path
@@ -39,7 +39,7 @@
                         </span>
                     </button>
 
-                    <button class="cssbuttons-io" onclick="openLoginPage()">
+                    <button class="cssbuttons-io">
                         <span>
                             <path d="M0 0h24v24H0z" fill="none"></path>
                             <path
@@ -62,7 +62,7 @@
                     </button>
                     
                     {% endif %}
-                </div>
+                 </div>
                 <div id="burger" class="burger">
                     <div class="line"></div>
                     <div class="line"></div>
@@ -89,13 +89,6 @@
             console.log("Button Clicked !!!")
             console.log(navLinks);
         });
-
-        function openLoginPage() {
-            window.location.href = 'login_style.htm'
-        }
-        function openSignUpPage() {
-            window.location.href = 'signUp.htm'
-        }
     
     </script>
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
@@ -112,3 +105,9 @@
     </html>
     
 
+
+
+
+
+
+    

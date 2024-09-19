@@ -108,11 +108,13 @@
 
 .main_right {
     /* border: 2px solid green; */
+    margin: 15px;
     box-shadow: 0px 0px 27px 0px rgba(0, 0, 0, .5);
 }
 
 #chairman {
     width: 20em;
+    height: 24em;
 }
 
 .main_right h3,
@@ -176,6 +178,7 @@ p {
 
     #chairman {
         width: 17em;
+        height: 20em;
         text-align: center;
     }
 

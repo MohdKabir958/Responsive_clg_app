@@ -1,16 +1,24 @@
 from flask import Flask,Blueprint, render_template,request
 from flask_login import login_required,current_user
+import requests 
 
 main = Blueprint('main',__name__)
 
 @main.route('/')
 def index():
-    return render_template('index.html',show_auth_buttons=True)
+        response=requests.get('https://api.kanye.rest/')
+        if response.status_code == 200:
+            data = response.json()
+            quote = data['quote']
+        return render_template('index.html',show_auth_buttons=True,quote=quote)
 
 @main.route('/home')
 def home():
-    return render_template('index.html',show_auth_buttons=True)
-
+        response=requests.get('https://api.kanye.rest/')
+        if response.status_code == 200:
+            data = response.json()
+            quote = data['quote']
+        return render_template('index.html',show_auth_buttons=True,quote=quote)
 
 @main.route('/mainpage/<username>')
 def mainpage(username):
@@ -23,3 +31,10 @@ def calculator():
 @main.route('/modelpaper')
 def modelpaper():
     return render_template('model_paper.html')
+
+
+
+
+
+
+
