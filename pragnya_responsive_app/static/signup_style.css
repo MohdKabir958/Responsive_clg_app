@@ -335,6 +335,9 @@
         height: 100%;
         flex-direction: column;
     }
+    .navbar{
+        align-items: flex-start;
+    }
 }
 
 

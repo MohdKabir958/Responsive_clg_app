@@ -26,7 +26,7 @@
                             <a href="{{ url_for( 'main.home' ) }}" class="links">HOME</a>
                         </span>
                     </button>
-                    
+
                     {% if show_auth_buttons %}
                     <button class="cssbuttons-io" onclick="openSignUpPage()">
                         <span>
@@ -60,8 +60,7 @@
                             <a href="{{ url_for( 'auth.logout' ) }}" class="links">LOGOUT</a>
                         </span>
                     </button>
-                    
-                    {% endif %}
+                     {% endif %}
                 </div>
                 <div id="burger" class="burger">
                     <div class="line"></div>
@@ -76,39 +75,35 @@
         {% block content %}
         {% endblock %}
     </main>
-    </body>
     
-
+    
     <script>
-        const burger = document.getElementById('burger');
-        const navLinks = document.querySelector('.nav-links');
-
-        burger.addEventListener('click', () => {
-            // Toggle the visibility of navigation buttons
-            navLinks.classList.toggle('nav-active');
-            console.log("Button Clicked !!!")
-            console.log(navLinks);
-        });
-
-        function openLoginPage() {
-            window.location.href = 'login_style.htm'
-        }
-        function openSignUpPage() {
-            window.location.href = 'signUp.htm'
-        }
+    const burger = document.getElementById('burger');
+    const navLinks = document.querySelector('.nav-links');
     
-    </script>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-    <script>
-        var typed = new
-            Typed('#element', {
-                strings: ['BCA STUDENT PORTAL'],
-                typeSpeed: 50, Loop: 10,
-            });
-
-
-    </script>
-
-    </html>
+    burger.addEventListener('click', () => {
+        // Toggle the visibility of navigation buttons
+        navLinks.classList.toggle('nav-active');
+        console.log("Button Clicked !!!")
+        console.log(navLinks);
+    });
     
+    function openLoginPage() {
+        window.location.href = 'login_style.htm'
+    }
+    function openSignUpPage() {
+        window.location.href = 'signUp.htm'
+    }
+    
+</script>
+<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+<script>
+    var typed = new
+    Typed('#element', {
+        strings: ['BCA STUDENT PORTAL'],
+        typeSpeed: 50, Loop: 10,
+    });
+</script>
 
+</body>
+</html>
