@@ -116,7 +116,7 @@
 
 #chairman {
     width: 20em;
-    height: 24em;
+    /* height: 24em; */
 }
 
 .main_right h3,
@@ -180,7 +180,7 @@ p {
 
     #chairman {
         width: 17em;
-        height: 20em;
+        /* height: 20em; */
         text-align: center;
     }
 

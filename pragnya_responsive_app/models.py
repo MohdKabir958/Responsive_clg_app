@@ -6,7 +6,6 @@ class User(db.Model,UserMixin):
     name = db.Column(db.String(150), nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
-
-
+    # profile_pic = db.Column(db.LargeBinary)  # Storing image as BLOB
 
     

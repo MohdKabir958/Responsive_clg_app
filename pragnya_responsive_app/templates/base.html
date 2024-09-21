@@ -26,6 +26,26 @@
                             <a href="{{ url_for( 'main.home' ) }}" class="links">HOME</a>
                         </span>
                     </button>
+                    <button class="cssbuttons-io">
+                        <span>
+                            <path d="M0 0h24v24H0z" fill="none"></path>
+                            <path
+                                d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
+                                fill="currentColor"></path>
+                            </svg>
+                            <a href="{{ url_for( 'main.profile' ) }}" class="links">Account</a>
+                        </span>
+                    </button>
+                    <button class="cssbuttons-io">
+                        <span>
+                            <path d="M0 0h24v24H0z" fill="none"></path>
+                            <path
+                                d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
+                                fill="currentColor"></path>
+                            </svg>
+                            <a href="{{ url_for( 'main.account' ) }}" class="links">Profile</a>
+                        </span>
+                    </button>
 
                     {% if show_auth_buttons %}
                     <button class="cssbuttons-io">
@@ -60,14 +80,8 @@
                             <a href="{{ url_for( 'auth.logout' ) }}" class="links">LOGOUT</a>
                         </span>
                     </button>
-<<<<<<< HEAD
-                    
-                    {% endif %}
-                 </div>
-=======
                      {% endif %}
                 </div>
->>>>>>> 0e1a6cfc7e8d21f14c7825780c8733d89398acce
                 <div id="burger" class="burger">
                     <div class="line"></div>
                     <div class="line"></div>
@@ -84,20 +98,8 @@
     
     
     <script>
-<<<<<<< HEAD
-        const burger = document.getElementById('burger');
-        const navLinks = document.querySelector('.nav-links');
-
-        burger.addEventListener('click', () => {
-            // Toggle the visibility of navigation buttons
-            navLinks.classList.toggle('nav-active');
-            console.log("Button Clicked !!!")
-            console.log(navLinks);
-        });
-=======
     const burger = document.getElementById('burger');
     const navLinks = document.querySelector('.nav-links');
->>>>>>> 0e1a6cfc7e8d21f14c7825780c8733d89398acce
     
     burger.addEventListener('click', () => {
         // Toggle the visibility of navigation buttons
@@ -123,14 +125,5 @@
     });
 </script>
 
-<<<<<<< HEAD
-
-
-
-
-
-    
-=======
 </body>
 </html>
->>>>>>> 0e1a6cfc7e8d21f14c7825780c8733d89398acce

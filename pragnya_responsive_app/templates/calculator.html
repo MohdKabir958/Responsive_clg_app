@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CGPA Calculator</title>
-    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,12 +23,12 @@
         .form-group {
             margin-bottom: 15px;
         }
-
+        
         label {
             display: block;
             font-weight: bold;
         }
-
+        
         input[type="number"],
         input[type="text"] {
             width: 100%;
@@ -45,11 +45,12 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
+        
         button:hover {
             background-color: #0056b3;
         }
     </style>
+<!-- <script src="{{ url_for('static', filename='\scripts\calculator.js') }}"></script> -->
 </head>
 
 <body>
@@ -74,9 +75,8 @@
         <button onclick="calculateCGPA()">Calculate CGPA</button>
         <div id="result"></div>
     </div>
-    <script src="script.js"></script>
-<script>
-
+    <script>
+        var grades = null; 
 function calculateCGPA() {
     var numSubjects = parseInt(document.getElementById('numSubjects').value);
     var subjectGrades = document.getElementById('subjectGrades').value.toUpperCase().split(',');
@@ -86,12 +86,12 @@ function calculateCGPA() {
     var result_of_subjects = printCombinedMarks(subjectGrades, true);
     var result_of_labs = printCombinedMarks(labGrades, false);
 
-    var final_sum = (result_of_subjects + result_of_labs) / (numSubjects * 4 + numLabs * 2);
-
+    var final_sum = (result_of_subjects + result_of_labs) / (numSubjects * 4 + numLabs * 2).toFixed(2);
+    grades=final_sum
     document.getElementById('result').innerHTML = `
                 <p>Total Subject Sum: ${result_of_subjects}</p>
                 <p>Total Lab Sum: ${result_of_labs}</p>
-                <p>Your CGPA is: ${final_sum.toFixed(2)}</p>
+                <p>Your CGPA is: ${final_sum}</p>
             `;
 }
 
@@ -122,9 +122,9 @@ function printCombinedMarks(marks, isSubjectArray) {
     }
 
     return total;
-}
+} 
 
-</script>
+ </script>
 </body>
 
 </html>
