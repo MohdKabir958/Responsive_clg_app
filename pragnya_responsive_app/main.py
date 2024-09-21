@@ -52,6 +52,7 @@ def process_data():
     return f"Received: {my_js_var}"
 
 @main.route('/account')
+@login_required
 def account():
     user_details = {
         'id': current_user.id,
