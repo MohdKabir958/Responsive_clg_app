@@ -50,27 +50,7 @@
         </div>
 
     </div>
-<div>
-    <button onclick="submitData()">Send Data to Flask</button>
 
-    <form id="myForm" action="/process_data" method="POST">
-        <input type="hidden" name="my_js_var" id="my_js_var">
-    </form>
-</div>
-<script>
-    
-    function submitData() {
-        // Example JavaScript variable
-        var myVar = "this is the marks ";
-        
-        // Set the form input value
-        document.getElementById('my_js_var').value = myVar;
-
-        // Submit the form
-        document.getElementById('myForm').submit();
-    }
-
-</script>
 </body> 
 </html>
 

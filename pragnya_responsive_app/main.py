@@ -1,4 +1,4 @@
-from flask import Flask,Blueprint, render_template,request,current_app,send_from_directory
+from flask import Flask,Blueprint, render_template,request,current_app,send_from_directory,redirect,url_for
 from flask_login import login_required,current_user
 import requests 
 import os 
@@ -45,11 +45,16 @@ def profile():
 
 
 
-@main.route('/process_data', methods=['POST'])
+@main.route('/submit_grade', methods=['POST'])
 def process_data():
-    my_js_var = request.form['my_js_var']  # Access the JavaScript variable from the form
-    print(f"Received data from JavaScript: {my_js_var}")
-    return f"Received: {my_js_var}"
+    student_grade = request.form['my_js_var']  # Access the JavaScript variable from the form
+    try:
+        student_grade = float(student_grade)
+        student_grade = round(student_grade, 2)  # Round to 2 decimal places
+    except ValueError:
+        return "Invalid grade input. Must be a number."  
+    print("Student grade is : ", student_grade)
+    return f"Student Grade: {student_grade}"
 
 @main.route('/account')
 @login_required
@@ -63,6 +68,12 @@ def account():
     return render_template('accounts.html', user=user_details)
 
 
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+# Function to check allowed extensions
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 @main.route('/upload', methods=['POST'])
 def upload_file():
     if 'profile_pic' not in request.files:
@@ -73,30 +84,25 @@ def upload_file():
     if file.filename == '':
         return "No selected file"
     
-    # Ensure the uploads directory exists
+    
     upload_folder = current_app.config.get('UPLOAD_FOLDER', 'uploads')
     if not os.path.exists(upload_folder):
         os.makedirs(upload_folder)
     
-    # Secure the filename
-    filename = secure_filename(file.filename)
-    file_path = os.path.join(upload_folder, filename)
     
-    # Handle potential filename conflicts by renaming
-    if os.path.exists(file_path):
-        # filename = f"{str(uuid.uuid4())}_{filename}"
+    if file and allowed_file(file.filename):
+        filename =  secure_filename(file.filename)
         file_path = os.path.join(upload_folder, filename)
+        file.save(file_path)
+        # return redirect(url_for('main.display_image', filename=filename))
+        return render_template('accounts.html', filename=filename)
     
-    # Save the file
-    file.save(file_path)
-    print("Upload folder:", upload_folder)
-    print("Saved file path:", file_path)
-
-    # Render the template to display the uploaded image
-    return render_template('accounts.html', filename=filename)
-
+    return 'Invalid file format'
+    
+    
 
 @main.route('/uploads/<filename>', methods=['GET', 'POST'])
 def display_image(filename):
-    
-    return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
+    # Serve the file from the 'uploads' directory inside the project
+    upload_folder = current_app.config['UPLOAD_FOLDER']
+    return send_from_directory(upload_folder, filename)

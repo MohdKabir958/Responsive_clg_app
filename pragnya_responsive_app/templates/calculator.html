@@ -75,6 +75,13 @@
         <button onclick="calculateCGPA()">Calculate CGPA</button>
         <div id="result"></div>
     </div>
+    <div>
+        <!-- <button onclick="submitData()">Send Data to Flask</button> -->
+    
+        <form id="myForm" action="/submit_grade" method="POST">
+            <input type="hidden" name="my_js_var" id="my_js_var">
+        </form>
+    </div>
     <script>
         var grades = null; 
 function calculateCGPA() {
@@ -87,12 +94,14 @@ function calculateCGPA() {
     var result_of_labs = printCombinedMarks(labGrades, false);
 
     var final_sum = (result_of_subjects + result_of_labs) / (numSubjects * 4 + numLabs * 2).toFixed(2);
+    final_sum = final_sum.toFixed(1)
     grades=final_sum
     document.getElementById('result').innerHTML = `
                 <p>Total Subject Sum: ${result_of_subjects}</p>
                 <p>Total Lab Sum: ${result_of_labs}</p>
                 <p>Your CGPA is: ${final_sum}</p>
             `;
+    submitData();
 }
 
 function printCombinedMarks(marks, isSubjectArray) {
@@ -124,6 +133,18 @@ function printCombinedMarks(marks, isSubjectArray) {
     return total;
 } 
 
+
+    
+    function submitData() {
+        // Example JavaScript variable
+        var myVar = grades;
+        
+        // Set the form input value
+        document.getElementById('my_js_var').value = myVar;
+
+        // Submit the form
+        document.getElementById('myForm').submit();
+    }
  </script>
 </body>
 
