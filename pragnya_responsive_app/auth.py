@@ -18,7 +18,8 @@ def login_post():
     # Handle the case where the user is not found
             username = None  # or some default value or raise an exception
         if user and check_password_hash(user.password,password=password):
-            login_user(user=user,remember=remember) 
+            login_user(user=user,remember=remember)
+            profile_pic = user.profile_pic 
             flash("Login Successfull!", 'success')
             return redirect(url_for("main.mainpage",username=username))
         else:

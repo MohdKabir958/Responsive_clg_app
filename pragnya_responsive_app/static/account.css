@@ -1,0 +1,16 @@
+body{
+    background-color: beige;
+}
+
+.main{
+    display: flex;
+    font-display: row;
+    justify-content: space-around;
+    text-align: center;
+}
+.user_data{
+    width: 50vw;
+}
+.user_profile_pic{
+    width: 50vw;
+}

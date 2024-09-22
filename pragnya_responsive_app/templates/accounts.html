@@ -4,21 +4,36 @@
 {% endblock %}
 
 {% block content %}
-
-<h1>Accounts:-</h1>
-<h1>User Profile</h1>
-
-{% if current_user.is_authenticated %}
-<p>User ID: {{ current_user.id }}</p>
-<p>Username: {{ current_user.name }}</p>
-<p>Email: {{ current_user.email }}</p>
-<!-- Add more fields as needed -->
-{% else %}
-<p>Please log in to view your profile.</p>
-{% endif %}
+<link rel="stylesheet" href="{{ url_for('static',filename='account.css') }}">
 
 
-<h1>Upload Your Profile Picture</h1>
+<div class="main">
+    <div class="user_data">
+        
+    
+
+        <h1>User Profile</h1>
+
+        {% if current_user.is_authenticated %}
+        
+        <p>User ID:         {{ current_user.id }}</p>
+        <p>Username:        {{ current_user.name }}</p>
+        <p>Email:           {{ current_user.email }}</p>
+        <p>Latest Grade:    {{ current_user.student_grade }} </p>
+        <!-- <p>profile-pic : {{ current_user.profile_pic }} </p> -->
+        <!-- Add more fields as needed -->
+        
+        {% else %}
+        <p>Please log in to view your profile.</p>
+        {% endif %}
+            
+    
+    
+    </div>
+    <div class="user_profile_pic">
+        
+    
+<h2>Upload Your Profile Picture</h2>
 
 <form action="{{ url_for('main.upload_file') }}" method="POST" enctype="multipart/form-data">
     <input type="file" name="profile_pic" id="profile_pic" accept="image/*" required>
@@ -26,22 +41,28 @@
 </form>
 
 
-<h1>Your Uploaded Image</h1>
 
 <!-- Display the image -->
+<h1>Profile Pic</h1>
 
 <!-- <img src="{{ url_for('main.display_image', filename=filename) }}" alt="Uploaded Image"  width="200px" height="150px"> -->
 
-<img src="{{ url_for('main.display_image', filename=filename) }}" alt="Uploaded Image" width="200px" height="150px">
+{% if current_user.profile_pic  %}
 
+<img src="{{ url_for('main.display_image', filename=current_user.profile_pic) }}" alt="Uploaded Image" width="200px" height="150px">
 
+{% endif %}
 
+    
+    
+    </div>
+</div>
+    
 
-<!-- # Image URL in your HTML or template: -->
-
-<!-- Display the filename -->
-<p>Filename: {{ filename }}</p>
 
 
 
 {% endblock %}
+
+
+

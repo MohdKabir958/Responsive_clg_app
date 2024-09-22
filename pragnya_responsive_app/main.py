@@ -4,26 +4,28 @@ import requests
 import os 
 from werkzeug.utils import secure_filename
 import uuid
+import time 
 
 main = Blueprint('main',__name__)
 
+def generate_quotes():
+    response=requests.get('https://api.kanye.rest/')
+    if response.status_code == 200:
+        data = response.json()
+        quote = data['quote']
+        return quote
+
+
+
 @main.route('/')
 def index():
-        response=requests.get('https://api.kanye.rest/')
-        if response.status_code == 200:
-            data = response.json()
-            quote = data['quote']
         show_auth_buttons = not current_user.is_authenticated
-        return render_template('index.html',show_auth_buttons=show_auth_buttons,quote=quote)
+        return render_template('index.html',show_auth_buttons=show_auth_buttons)
 
 @main.route('/home')
 def home():
-        response=requests.get('https://api.kanye.rest/')
-        if response.status_code == 200:
-            data = response.json()
-            quote = data['quote']
         show_auth_buttons = not current_user.is_authenticated
-        return render_template('index.html',show_auth_buttons=show_auth_buttons,quote=quote)
+        return render_template('index.html',show_auth_buttons=show_auth_buttons)
 
 @main.route('/mainpage/<username>')
 @login_required
@@ -44,7 +46,6 @@ def profile():
     return render_template('cards.html', username=current_user.name)
 
 
-
 @main.route('/submit_grade', methods=['POST'])
 def process_data():
     student_grade = request.form['my_js_var']  # Access the JavaScript variable from the form
@@ -53,8 +54,29 @@ def process_data():
         student_grade = round(student_grade, 2)  # Round to 2 decimal places
     except ValueError:
         return "Invalid grade input. Must be a number."  
-    print("Student grade is : ", student_grade)
-    return f"Student Grade: {student_grade}"
+    
+    from .models import User 
+    from . import db 
+    
+    email = current_user.email  
+    student = User.query.filter_by(email=email).first()
+
+
+
+    if student:
+        # Update the grade for the existing user
+        student.student_grade = student_grade
+        db.session.commit()  # Commit the changes
+        # return f"Grade updated for {student.name}."
+        time.sleep(5)
+        return redirect(url_for('main.profile'))
+        # return render_template('calculator.html')
+    
+    else:
+        return "User not found."
+    
+    # return f"Student Grade: {student_grade}"
+    # print("Student grade is : ", student_grade)
 
 @main.route('/account')
 @login_required
@@ -63,6 +85,8 @@ def account():
         'id': current_user.id,
         'username': current_user.name,
         'email': current_user.email,
+        'student_grade' : current_user.student_grade,
+        'Profile_pic' : current_user.profile_pic,
         # Add other attributes as needed
     }
     return render_template('accounts.html', user=user_details)
@@ -73,6 +97,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+FILEPATH = ""
 
 @main.route('/upload', methods=['POST'])
 def upload_file():
@@ -94,10 +119,30 @@ def upload_file():
         filename =  secure_filename(file.filename)
         file_path = os.path.join(upload_folder, filename)
         file.save(file_path)
+   
+    from .models import User 
+    from . import db 
+        
+            
+    email = current_user.email  
+    user = User.query.filter_by(email=email).first()
+
+    if user:
+        # Update the grade for the existing user
+        user.profile_pic=filename
+        db.session.commit()  # Commit the changes
+        # image_url = url_for('', filename=user.image_path.split('pragnya_responsive_app/')[1])
+        image_url = user.profile_pic        
         # return redirect(url_for('main.display_image', filename=filename))
-        return render_template('accounts.html', filename=filename)
+        # return render_template('accounts.html', filename=filename)
+        return render_template('accounts.html', filename=image_url)
     
-    return 'Invalid file format'
+    else:
+        return 'Invalid file format'
+
+
+
+    
     
     
 
