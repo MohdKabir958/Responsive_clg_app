@@ -68,16 +68,26 @@
             width: 100vw;
             /* border: 2px solid red; */
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: space-around;
             flex-wrap: wrap;
         }
 
         @media (max-width: 768px) {
+            .main{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap:2em;
+            }
             .cookieCard {
-                width: 100%;
-                max-width: 100%;
+                width: 100vw;
+                max-width: 100vw;
                 border: 2px solid black;
+            }
+            #username{
+                text-align: center;
             }
         }
 
