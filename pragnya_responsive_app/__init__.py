@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from .main import main as main_blueprint
@@ -12,6 +12,9 @@ login_manager = LoginManager()
 def create_app():
     app = Flask(__name__)
     app.secret_key = 'clg_application'  # Replace with a strong, unique key
+
+
+
 
     app.register_blueprint(main_blueprint)
     app.register_blueprint(auth_blueprint)
@@ -41,6 +44,8 @@ def create_app():
     with app.app_context():
         db.create_all()  # Creates the database tables
     
+
+
     return app
 
 
