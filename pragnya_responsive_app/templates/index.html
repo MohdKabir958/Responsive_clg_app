@@ -1,29 +1,34 @@
 {% extends "base.html" %}
 {% block head %}
-    {{ super() }}
+{{ super() }}
 {% endblock %}
 
 {% block content %}
+
 <body>
-<section class="1">
-    <link rel="stylesheet" href="{{ url_for('static',filename='style_index.css') }}">
+    <main>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style_index.css') }}">
         <div class="main">
 
             <div class="main_left">
-                <h1>chairman message</h1>
+                <h1>Chairman's Message</h1>
                 <p>
-                    matter ---  chairman  -----
+                    Pragnya Degree Colleges in Hyderabad owns an as integrated objective i.e. quality education that
+                    meets today’s industrial requirements and the ability to face challenges in the real world.
+                    Therefore, every student from Pragnya Degree Colleges in Hyderabad will extend their wings to fly
+                    high and aspire to their dreams.
                 </p>
             </div>
             <div class="main_right">
                 <img src=" {{ url_for('static',filename='images_folder/chairman.webp') }}" alt="chairman" id="chairman">
-                <h3>Pragnya Boys</h3>
-                <p> Mentor -- <br>
-                    P.Narsimha Raju, Srinivas </p>
+                <h3>S.SREENIVASA REDDY</h3>
+                <p>M.Com, LLB
+                    <br>
+                    CHAIRMAN</p>
             </div>
         </div>
-    </section>
-    
+    </main>
+
 
 
 
