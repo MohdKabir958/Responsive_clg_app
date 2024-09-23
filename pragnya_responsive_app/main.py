@@ -89,7 +89,8 @@ def account():
         'Profile_pic' : current_user.profile_pic,
         # Add other attributes as needed
     }
-    return render_template('accounts.html', user=user_details)
+    quote = generate_quotes()
+    return render_template('accounts.html', user=user_details, quote=quote)
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}

@@ -6,12 +6,17 @@
     /* border: 2px solid red; */
 
 }
+body{
+    background-color: #f5f5f5;
+}
 
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: rgb(209, 193, 255);
+    /* background-color: rgb(209, 193, 255); */
+    background-color:  #343a40;;
+    color: #ffffff;
     border-bottom: 2px solid black;
     padding: 10px;
     /* z-index: 999; */
@@ -62,7 +67,8 @@
 
 .cssbuttons-io::before {
     content: "";
-    background: #000;
+    /* background: #000; */
+    background-color:  #495057;
     width: 120%;
     left: -10%;
     transform: skew(30deg);
@@ -145,6 +151,15 @@ p {
     margin: 5px 3px;
 }
 
+footer{
+    background-color: #343a40;
+    font-family: Arial, sans-serif;    
+    color:white;
+    width: 100vw;
+}
+footer p {
+    text-align: right;
+}
 
 @media only screen and (max-width:768px) {
     .main {

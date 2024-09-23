@@ -27,7 +27,7 @@
         <p>Please log in to view your profile.</p>
         {% endif %}
             
-    
+        
     
     </div>
     <div class="user_profile_pic">
@@ -51,14 +51,25 @@
 
 <img src="{{ url_for('main.display_image', filename=current_user.profile_pic) }}" alt="Uploaded Image" width="200px" height="150px">
 
+
+
+
+
 {% endif %}
 
     
     
     </div>
+    
 </div>
     
-
+    <div class="quotes">
+        <h2>Stay Motivated..</h2>
+        {% if quote %}  
+        <p>  {{ quote }} </p>
+        {% endif %}
+    </div>        
+    
 
 
 
