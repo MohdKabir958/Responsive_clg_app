@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='cards.css') }}">
 <div>
     {% if username %}
-    <h1 style="color: lightgreen; padding-top:5px" id="username">Welcome, {{ username }}!</h1>
+    <h1 style="color: rgb(203, 37, 37); padding-top:5px" id="username">Welcome, {{ username }}!</h1>
 {% endif %}
 </div>
     <div class="main">
@@ -49,6 +49,11 @@
             </a>
         </div>
 
+        <div class="chat">
+            
+            <button ><a href="{{ url_for('main.chat') }}" style="color: aliceblue; background-color: black;"> Groupchat    </a> </button>
+            
+        </div>
     </div>
 
 </body> 

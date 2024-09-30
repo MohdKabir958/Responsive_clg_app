@@ -1,5 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
 
 <head>
     <meta charset="UTF-8">
@@ -148,4 +152,4 @@ function printCombinedMarks(marks, isSubjectArray) {
  </script>
 </body>
 
-</html>
+{% endblock %}

@@ -8,11 +8,12 @@
 }
 
 body {
-    background-image: url('/pragnya_responsive_app/static/images_folder/images.jpeg');
+    background-image: url("/static/images_folder/images.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
-    /* background-color: #f5f5f5; */
 }
+
+
 
 .navbar {
     display: flex;

@@ -5,15 +5,13 @@ import os
 from werkzeug.utils import secure_filename
 import uuid
 import time 
+from .apis import WeatherReport,Quotes
+from flask_socketio import SocketIO, emit, join_room, leave_room
+
+weather = WeatherReport()
+quotes = Quotes()
 
 main = Blueprint('main',__name__)
-
-def generate_quotes():
-    response=requests.get('https://api.kanye.rest/')
-    if response.status_code == 200:
-        data = response.json()
-        quote = data['quote']
-        return quote
 
 
 
@@ -89,8 +87,9 @@ def account():
         'Profile_pic' : current_user.profile_pic,
         # Add other attributes as needed
     }
-    quote = generate_quotes()
-    return render_template('accounts.html', user=user_details, quote=quote)
+    quote = quotes.generate_quotes()
+    weather_condition = weather.get_weather()
+    return render_template('account.html', user=user_details, quote=quote, weather_condition=weather_condition)
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -136,7 +135,7 @@ def upload_file():
         image_url = user.profile_pic        
         # return redirect(url_for('main.display_image', filename=filename))
         # return render_template('accounts.html', filename=filename)
-        return render_template('accounts.html', filename=image_url)
+        return render_template('account.html', filename=image_url)
     
     else:
         return 'Invalid file format'
@@ -152,3 +151,17 @@ def display_image(filename):
     # Serve the file from the 'uploads' directory inside the project
     upload_folder = current_app.config['UPLOAD_FOLDER']
     return send_from_directory(upload_folder, filename)
+
+
+
+
+
+@main.route('/chat')
+def chat():
+    user = current_user.name
+    return render_template('chat.html',user=user)
+
+@main.route('/leave_room')
+def leave_room():
+    time.sleep(0.9)
+    return render_template('cards.html')
