@@ -152,6 +152,7 @@
 
 .logo img {
     width: 15em;
+    /* mix-blend-mode:color-burn; */
 }
 
 
@@ -327,7 +328,9 @@
         font-size: 1.5em;
     }
 } */
-
+.remember{
+    z-index:1;
+}
 
 @media only screen and (max-width:1125px) {
     .cssbuttons-io {
