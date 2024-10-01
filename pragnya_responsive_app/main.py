@@ -155,13 +155,3 @@ def display_image(filename):
 
 
 
-
-@main.route('/chat')
-def chat():
-    user = current_user.name
-    return render_template('chat.html',user=user)
-
-@main.route('/leave_room')
-def leave_room():
-    time.sleep(0.9)
-    return render_template('cards.html')

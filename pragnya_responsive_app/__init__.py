@@ -5,7 +5,6 @@ from .main import main as main_blueprint
 from .auth import auth as auth_blueprint
 from flask_migrate import Migrate
 from flask_socketio import SocketIO, emit, join_room, leave_room
-from flask_cors import CORS
 
 
 db = SQLAlchemy()
@@ -15,12 +14,6 @@ login_manager = LoginManager()
 def create_app():
     app = Flask(__name__)
     app.secret_key = 'clg_application'  # Replace with a strong, unique key
-    CORS(app, resources={r"/*": {"origins": "*"}})
-
-    # socketio = SocketIO(app)
-
-    socketio = SocketIO(app, cors_allowed_origins="*")  # Allow all origins for SocketIO
-
 
     app.register_blueprint(main_blueprint)
     app.register_blueprint(auth_blueprint)
@@ -41,26 +34,6 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
 
-        # Socket Events
-    @socketio.on('join')
-    def on_join(data):
-        username = data['username']
-        room = data['room']
-        join_room(room)
-        emit('message', {'msg': f"{username} has joined the room."}, room=room)
-
-    @socketio.on('message')
-    def handle_message(data):
-        room = data['room']
-        emit('message', {'msg': f"{data['username']}: {data['msg']}"}, room=room)
-
-    @socketio.on('leave')
-    def on_leave(data):
-        username = data['username']
-        room = data['room']
-        leave_room(room)
-        emit('message', {'msg': f"{username} has left the room."}, room=room)
-    
 
 
     from .models import db
@@ -72,6 +45,6 @@ def create_app():
     
 
 
-    return app,socketio
+    return app
 
 
