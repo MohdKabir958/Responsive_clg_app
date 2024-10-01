@@ -5,6 +5,7 @@ from .main import main as main_blueprint
 from .auth import auth as auth_blueprint
 from flask_migrate import Migrate
 from flask_socketio import SocketIO, emit, join_room, leave_room
+from flask_cors import CORS
 
 
 db = SQLAlchemy()
@@ -14,9 +15,11 @@ login_manager = LoginManager()
 def create_app():
     app = Flask(__name__)
     app.secret_key = 'clg_application'  # Replace with a strong, unique key
+    CORS(app, resources={r"/*": {"origins": "*"}})
 
-    socketio = SocketIO(app)
+    # socketio = SocketIO(app)
 
+    socketio = SocketIO(app, cors_allowed_origins="*")  # Allow all origins for SocketIO
 
 
     app.register_blueprint(main_blueprint)
@@ -69,6 +72,6 @@ def create_app():
     
 
 
-    return app
+    return app,socketio
 
 
