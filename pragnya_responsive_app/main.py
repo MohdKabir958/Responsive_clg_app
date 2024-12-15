@@ -41,6 +41,10 @@ def modelpaper():
 def profile():
     return render_template('cards.html', username=current_user.name)
 
+@main.route('/courses')
+def courses():
+    return render_template('courses.html')
+
 
 @main.route('/submit_grade', methods=['POST'])
 def process_data():
@@ -151,7 +155,3 @@ def display_image(filename):
     return send_from_directory(upload_folder, filename)
 
 
-
-@main.route('/courses')
-def courses():
-    return render_template('courses.html')
