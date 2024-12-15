@@ -89,7 +89,7 @@ def account():
     return render_template('account.html', user=user_details)
 
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'heic', 'heif'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'heic', 'heif','webp'}
 
 # Function to check allowed extensions
 def allowed_file(filename):
