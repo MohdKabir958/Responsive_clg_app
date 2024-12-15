@@ -152,4 +152,6 @@ def display_image(filename):
 
 
 
-
+@main.route('/courses')
+def courses():
+    return render_template('courses.html')
