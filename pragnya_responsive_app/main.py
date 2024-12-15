@@ -5,11 +5,9 @@ import os
 from werkzeug.utils import secure_filename
 import uuid
 import time 
-from .apis import WeatherReport,Quotes
-from flask_socketio import SocketIO, emit, join_room, leave_room
 
-weather = WeatherReport()
-quotes = Quotes()
+
+
 
 main = Blueprint('main',__name__)
 
@@ -87,12 +85,12 @@ def account():
         'Profile_pic' : current_user.profile_pic,
         # Add other attributes as needed
     }
-    quote = quotes.generate_quotes()
-    weather_condition = weather.get_weather()
-    return render_template('account.html', user=user_details, quote=quote, weather_condition=weather_condition)
+    
+    return render_template('account.html', user=user_details)
 
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'heic', 'heif'}
+
 # Function to check allowed extensions
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
