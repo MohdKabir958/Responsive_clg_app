@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 import uuid
 import time 
 from .apis import WeatherReport,Quotes
-from flask_socketio import SocketIO, emit, join_room, leave_room
+# from flask_socketio import SocketIO, emit, join_room, leave_room
 
 weather = WeatherReport()
 quotes = Quotes()
