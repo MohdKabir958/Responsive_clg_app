@@ -194,7 +194,7 @@ footer p {
     }
 
     .cssbuttons-io {
-        display: none;
+        /* display: none; */
     }
 
     #element {
@@ -212,6 +212,10 @@ footer p {
         position: absolute;
         left: 80%;
         top: 1%;
+    }
+    .burger:hover{
+        border: 2px solid white;
+
     }
 
     .nav-active {
