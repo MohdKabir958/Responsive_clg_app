@@ -1,4 +1,4 @@
-from flask import Flask,Blueprint, render_template,request,current_app,send_from_directory,redirect,url_for
+from flask import Flask,Blueprint, render_template,request,current_app,send_from_directory,redirect,url_for,Response 
 from flask_login import login_required,current_user
 import requests 
 import os 
@@ -78,19 +78,26 @@ def process_data():
     # return f"Student Grade: {student_grade}"
     # print("Student grade is : ", student_grade)
 
-@main.route('/account')
+# @main.route('/account')
+# @login_required
+# def account():
+#     user_details = {
+#         'id': current_user.id,
+#         'username': current_user.name,
+#         'email': current_user.email,
+#         'student_grade' : current_user.student_grade,
+#         'Profile_pic' : current_user.profile_pic,
+#         # Add other attributes as needed
+#     }
+    
+#     return render_template('account.html', user=user_details)
+
+
+@main.route("/account")
 @login_required
 def account():
-    user_details = {
-        'id': current_user.id,
-        'username': current_user.name,
-        'email': current_user.email,
-        'student_grade' : current_user.student_grade,
-        'Profile_pic' : current_user.profile_pic,
-        # Add other attributes as needed
-    }
-    
-    return render_template('account.html', user=user_details)
+     return render_template('account.html')
+
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'heic', 'heif','webp'}
@@ -101,47 +108,97 @@ def allowed_file(filename):
 
 FILEPATH = ""
 
-@main.route('/upload', methods=['POST'])
-def upload_file():
-    if 'profile_pic' not in request.files:
-        return "No file part"
+# @main.route('/upload', methods=['POST'])
+# def upload_file():
+#     if 'profile_pic' not in request.files:
+#         return "No file part"
     
-    file = request.files['profile_pic']
+#     file = request.files['profile_pic']
     
-    if file.filename == '':
-        return "No selected file"
-    
-    
-    upload_folder = current_app.config.get('UPLOAD_FOLDER', 'uploads')
-    if not os.path.exists(upload_folder):
-        os.makedirs(upload_folder)
+#     if file.filename == '':
+#         return "No selected file"
     
     
-    if file and allowed_file(file.filename):
-        filename =  secure_filename(file.filename)
-        file_path = os.path.join(upload_folder, filename)
-        file.save(file_path)
+#     upload_folder = current_app.config.get('UPLOAD_FOLDER', 'uploads')
+#     if not os.path.exists(upload_folder):
+#         os.makedirs(upload_folder)
+    
+    
+#     if file and allowed_file(file.filename):
+#         filename =  secure_filename(file.filename)
+#         file_path = os.path.join(upload_folder, filename)
+#         file.save(file_path)
    
-    from .models import User 
-    from . import db 
+#     from .models import User 
+#     from . import db 
         
             
-    email = current_user.email  
-    user = User.query.filter_by(email=email).first()
+#     email = current_user.email  
+#     user = User.query.filter_by(email=email).first()
 
-    if user:
-        # Update the grade for the existing user
-        user.profile_pic=filename
-        db.session.commit()  # Commit the changes
-        # image_url = url_for('', filename=user.image_path.split('pragnya_responsive_app/')[1])
-        image_url = user.profile_pic        
-        # return redirect(url_for('main.display_image', filename=filename))
-        # return render_template('accounts.html', filename=filename)
-        return render_template('account.html', filename=image_url)
+#     if user:
+#         # Update the grade for the existing user
+#         user.profile_pic=filename
+#         db.session.commit()  # Commit the changes
+#         # image_url = url_for('', filename=user.image_path.split('pragnya_responsive_app/')[1])
+#         image_url = user.profile_pic        
+#         # return redirect(url_for('main.display_image', filename=filename))
+#         # return render_template('accounts.html', filename=filename)
+#         return render_template('account.html', filename=image_url)
     
-    else:
-        return 'Invalid file format'
+#     else:
+#         return 'Invalid file format'
 
+
+
+
+
+@main.route('/upload',methods=['POST'])
+def upload():
+    from .models import Image
+    from . import db 
+    pic = request.files['profile_pic']
+    if not pic:
+        # return redirect(url_for('static', filename='default_profile.jpg'))
+        return "no pic uploaded ", 400 
+    if pic:
+        img_name = secure_filename(pic.filename)
+        mimetype = pic.mimetype
+        img_data = pic.read()  # Read the image binary data
+        user_id = current_user.id  # Logged-in user ID
+
+        
+
+        existing_image = Image.query.filter_by(user_id=user_id).first()
+
+        if existing_image:
+            # Update the existing image record
+            existing_image.img = img_data
+            existing_image.imgname = img_name
+            existing_image.mimetype = mimetype
+            db.session.commit()  # Commit the changes to the database
+            return "Image has been updated", 200 
+        else:
+            # Create a new image record for the user
+            new_image = Image(user_id=user_id, img=img_data, imgname=img_name, mimetype=mimetype)
+            db.session.add(new_image)
+            db.session.commit()
+            
+    return "image has been uploaded ", 200 
+
+     
+@main.route("/image/<int:id>")
+def get_img(id):
+    from .models import Image
+    from . import db 
+    image = Image.query.filter_by(user_id=id).first()
+    if not image or not image.img:
+        default_img_path = 'static/images_folder/default-img.png'
+        # return f"no picture with id:{id}"
+        return redirect(url_for('static', filename='images_folder/default-img.png'))
+
+
+    return Response(image.img,mimetype=image.mimetype)
 
 
     
