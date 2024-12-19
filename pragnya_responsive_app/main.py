@@ -212,3 +212,7 @@ def display_image(filename):
     return send_from_directory(upload_folder, filename)
 
 
+@main.route('/default_img')
+def get_default_img():
+    default_img_path = 'static/images_folder/default-img.png'
+    return redirect(url_for('static', filename='images_folder/default-img.png'))

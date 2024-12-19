@@ -11,6 +11,8 @@ body {
     background-image: url("/static/images_folder/images.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
+    font-style: oblique;
+
 }
 
 

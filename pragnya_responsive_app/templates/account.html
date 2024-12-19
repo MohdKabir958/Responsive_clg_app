@@ -71,7 +71,7 @@
             /* border: 2px solid red; */
             /* text-align: right; */
             /* margin-bottom: 2em; */
-
+            mix-blend-mode: darken;
         }
 
         .card-1 {
@@ -206,8 +206,16 @@
                 right: 3px;
                 /* display: none; */
             }
+            
 
         }
+        p,
+        h1,
+        h2 {
+            font-weight: bolder;
+            font-style: oblique;
+        }
+
     </style>
     <link rel="stylesheet" href="/pragnya_responsive_app/static/index_style.css">
 </head>
@@ -269,6 +277,16 @@
             <input type="file" name="profile_pic" id="profile_pic" accept="image/*" required>
             <button type="submit">Upload</button>
         </form>
+        
+        <div class="setting_options">
+            <h2>Options:</h2>
+            <select name="Options" id="options-dropdown" onchange="handleOptionChange()">
+                <option value="">Select an Option</option>
+                <option value="remove-dp"> <a href="{{ url_for('main.get_default_img') }}">  Remove Dp </a</option>
+                <!-- Add other options here if needed -->
+            </select>
+        </div>
+
 
     </div>
 
@@ -281,6 +299,17 @@
             sett_toggle.classList.toggle('setting_toggle')
             console.log(sett_toggle)
         });
+        function handleOptionChange() {
+            var selectedOption = document.getElementById('options-dropdown').value;
+
+            if (selectedOption === 'remove-dp') {
+                // Your logic to remove the profile picture
+                alert("Removing profile picture...");
+                alert("please reload to reflect the changes...");
+                
+                
+            }
+        }
     </script>
 </body>
 
